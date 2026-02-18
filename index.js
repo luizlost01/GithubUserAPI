@@ -26,10 +26,31 @@ function formatApiData(events) {
     }
 
     const pushEventCount = events.filter(e => e.type === "PushEvent").length;
-    console.log(`O Usuario Realizou: ${pushEventCount} Commits`);
-
+    console.log(`O Usuario Realizou: ${pushEventCount} Commits nos Repositórios: `);
+    events.forEach(element => {
+        if(element.type == "PushEvent") {
+            console.log(element.repo.name);
+        }
+    });
     const publicEventCount = events.filter(e => e.type === "PublicEvent").length
     console.log(`O Usuario Subiu: ${publicEventCount} Novo(s) Projeto(s)`);
+    events.forEach(element => {
+        if(element.type == 'PublicEvent') {
+            console.log(element.repo.name);
+        }        
+    })
+
+    const PullRequestEventCount = events.filter(e => e.type === "PullRequestEvent").length
+    console.log(`O Usuario Abriu ${PullRequestEventCount} Pull Requests`);
+    events.forEach(element => {
+        if(element.type == 'PullRequestEvent') {
+            console.log(element.repo.name);
+        }        
+    })
+
+
+
+
 }
 
 
